@@ -1,5 +1,7 @@
 # DeepSeekAIFoundryUI
 
+![Screenshot](media/screenshot.png)
+
 This is a simple WPF application written in C#. It acts as an AI chatbot by sending your questions to a configured AI model. It can store chat history in a local database for later reference.
 
 To run the app, open the solution in Visual Studio or Visual Studio Code, restore NuGet packages, and build the project. If you have an `appsettings.json` file, make sure it has valid values for ModelKey, ModelEndpoint, and ModelName.
