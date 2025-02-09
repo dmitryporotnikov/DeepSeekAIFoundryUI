@@ -15,7 +15,7 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # or change to match your .NET version
+          dotnet-version: '8.0.x'  
 
       - name: Restore dependencies
         run: dotnet restore
@@ -35,7 +35,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub will inject a token automatically
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
         with:
           tag_name: build-${{ github.run_number }}
           release_name: "Build ${{ github.run_number }}"
