@@ -1,0 +1,53 @@
+name: Build and Release on Main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build_and_publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # or change to match your .NET version
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Publish
+        run: dotnet publish --configuration Release -o ./publish
+
+      - name: Zip published folder
+        # Compress-Archive is a native PowerShell command on Windows runners
+        run: pwsh -command "Compress-Archive -Path './publish/*' -DestinationPath './DeepSeekAIFoundryUI.zip'"
+
+      # Create a release for each build
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub will inject a token automatically
+        with:
+          tag_name: build-${{ github.run_number }}
+          release_name: "Build ${{ github.run_number }}"
+          draft: false
+          prerelease: true
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./DeepSeekAIFoundryUI.zip
+          asset_name: DeepSeekAIFoundryUI.zip
+          asset_content_type: application/zip
