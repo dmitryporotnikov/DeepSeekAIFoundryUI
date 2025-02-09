@@ -1,0 +1,29 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userprefs
+*.csproj.user
+*.dbmdl
+*.opendb
+
+# Visual Studio Code
+.vscode/
+
+# NuGet cache
+packages/
+*.nupkg
+
+# Log files
+*.log
+
+# Database files
+*.db
+
+# User secrets or local app config containing credentials
+appsettings.json
+appsettings.*.json
