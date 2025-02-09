@@ -1,6 +1,6 @@
 # DeepSeekAIFoundryUI
 
-![Screenshot](media/screenshot.png)
+![Screenshot](Media/screenshot.png)
 
 This is a simple WPF application written in C#. It acts as an AI chatbot by sending your questions to a configured AI model. It can store chat history in a local database for later reference.
 
